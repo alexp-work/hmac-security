@@ -34,7 +34,8 @@ namespace Security.HMAC
                 return !string.IsNullOrWhiteSpace(overrideScheme) ? overrideScheme : msg.Url.Scheme;
             }
 
-            string url = msg.Headers.FirstOrDefault(Headers.XOriginalUrl);
+            string url = msg.Headers.FirstOrDefault(Headers.XOriginalUrl)
+                ?? msg.Headers.FirstOrDefault(Headers.XOriginalUri);
 
             if (url == null)
                 return msg.Url;
